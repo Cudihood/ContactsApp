@@ -15,6 +15,8 @@ namespace NoteAppUI
         public MainForm()
         {
             InitializeComponent();
+            
         }
+        
     }
 }
