@@ -10,6 +10,6 @@ namespace NoteAppUI
     {
         static void Main(string[] args)
         {
-        }//dfsasd
+        }
     }
 }
