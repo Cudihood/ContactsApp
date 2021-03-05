@@ -43,13 +43,13 @@ namespace NoteApp
             get { return _name; }
             set
             {
+                if (value == string.Empty)
+                {
+                    throw new ArgumentException("Ошибка. Пустая строка");
+                }
                 if (value.Length > 50)
                 {
                     throw new ArgumentException("Ошибка. Имя не должно превышать 50 символов");
-                }
-                else if (value == string.Empty || value == null)
-                {
-                    throw new ArgumentException("Ошибка. Пустая строка");
                 }
                 else
                 {
@@ -67,13 +67,13 @@ namespace NoteApp
             get { return _surname; }
             set
             {
+                if (value == string.Empty)
+                {
+                    throw new ArgumentException("Ошибка. Пустая строка");
+                }
                 if (value.Length > 50)
                 {
                     throw new ArgumentException("Ошибка. Фамилия не должно превышать 50 символов");
-                }
-                else if (value == string.Empty || value == null)
-                {
-                    throw new ArgumentException("Ошибка. Пустая строка");
                 }
                 else
                 {
@@ -91,13 +91,13 @@ namespace NoteApp
             get { return _email; }
             set
             {
+                if (value == string.Empty)
+                {
+                    throw new ArgumentException("Ошибка. Пустая строка");
+                }
                 if (value.Length > 50)
                 {
                     throw new ArgumentException("Ошибка. E-mail не должно превышать 50 символов");
-                }
-                else if (value == string.Empty || value == null)
-                {
-                    throw new ArgumentException("Ошибка. Пустая строка");
                 }
                 else
                 {
@@ -115,13 +115,13 @@ namespace NoteApp
             get { return _idVkontacte; }
             set
             {
+                if (value == string.Empty)
+                {
+                    throw new ArgumentException("Ошибка. Пустая строка");
+                }
                 if (value.Length > 50)
                 {
                     throw new ArgumentException("Ошибка. ID не должно превышать 15 символов");
-                }
-                else if (value == string.Empty || value == null)
-                {
-                    throw new ArgumentException("Ошибка. Пустая строка");
                 }
                 else
                 {
@@ -156,7 +156,7 @@ namespace NoteApp
         /// <summary>
         /// Возвращает и задает номер телефона.
         /// </summary>
-        public NumberPhone Number { get; set; }
+        public NumberPhone Number { get; set; } = new NumberPhone();
 
 
         /// <summary>
@@ -164,7 +164,8 @@ namespace NoteApp
         /// </summary>
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return new Contact(this.Name, this.Surname, this.DateBirth, this.Email, this._idVkontacte,
+                NumberPhone.Number);
         }
 
         /// <summary>
