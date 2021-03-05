@@ -33,7 +33,7 @@ namespace NoteApp
         /// <summary>
         /// ID контакта.
         /// </summary>
-        private string _idVkontacte;
+        private string _idVk;
 
         /// <summary>
         /// Возвращает и задает имя контакта.
@@ -112,7 +112,7 @@ namespace NoteApp
         /// </summary>
         public string IdVkonacte
         {
-            get { return _idVkontacte; }
+            get { return _idVk; }
             set
             {
                 if (value == string.Empty)
@@ -125,7 +125,7 @@ namespace NoteApp
                 }
                 else
                 {
-                    _idVkontacte = value;
+                    _idVk = value;
                 }
             }
         }
@@ -164,7 +164,7 @@ namespace NoteApp
         /// </summary>
         public object Clone()
         {
-            return new Contact(this.Name, this.Surname, this.DateBirth, this.Email, this._idVkontacte,
+            return new Contact(this.Name, this.Surname, this.DateBirth, this.Email, this._idVk,
                 this.Number.Number);
         }
 
@@ -193,7 +193,7 @@ namespace NoteApp
         public void GetInfo()
         {
             Console.WriteLine($"Имя: {_name}  Фамилия: {_surname}  Дата рождения: {_dateBirth}  " +
-                              $"E-mail: {_email}  ID VK: {_idVkontacte}  Номер телефона: {Number.Number}" );
+                              $"E-mail: {_email}  ID VK: {_idVk}  Номер телефона: {Number.Number}" );
         }
     }
     
