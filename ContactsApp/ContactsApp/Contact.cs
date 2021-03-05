@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace NoteApp
+namespace ContactsApp
 {
     /// <summary>
     /// Класс контакт храняший информацию о имени, фамилии, номера телефона,

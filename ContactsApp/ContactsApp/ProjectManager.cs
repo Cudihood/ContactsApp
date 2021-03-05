@@ -3,7 +3,7 @@ using System.IO;
 using Newtonsoft.Json;
 
 
-namespace NoteApp
+namespace ContactsApp
 {
     /// <summary>
     /// Реализует чтение и запись проекта в файл.
