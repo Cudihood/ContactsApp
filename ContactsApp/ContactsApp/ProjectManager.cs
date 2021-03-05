@@ -31,6 +31,12 @@ namespace ContactsApp
             //Создаём экземпляр сериализатора
             JsonSerializer serializer = new JsonSerializer();
 
+            var folder = Path.GetDirectoryName(fileName);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
             //Открываем поток для записи в файл с указанием пути
             using (StreamWriter sw = new StreamWriter(fileName))
             using (JsonWriter writer = new JsonTextWriter(sw))
