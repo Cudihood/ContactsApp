@@ -12,9 +12,14 @@ namespace ContactsAppUI
     {
         static void Main()
         {
+
             Contact contact = new Contact("asd", "sfsd", DateTime.Now, "sadasdasf",
                 "sdadad", 79609721441);
-            contact.GetInfo();
+            
+           
+            Console.WriteLine($"Имя: {contact.Name}  Фамилия: {contact.Surname}  Дата рождения: {contact.DateBirth}  " +
+                                  $"E-mail: {contact.Email}  ID VK: {contact.IdVk}  Номер телефона: {contact.Number}");
+           
 
             Project data = new Project();
             data.Contacts.Add(contact);

@@ -110,7 +110,7 @@ namespace ContactsApp
         /// <summary>
         /// Возвращает и задает ID Вконтакте.
         /// </summary>
-        public string IdVkonacte
+        public string IdVk
         {
             get { return _idVk; }
             set
@@ -182,19 +182,12 @@ namespace ContactsApp
             Surname = surname;
             DateBirth = dateBirth;
             Email = email;
-            IdVkonacte = idVkontacte;
+            IdVk = idVkontacte;
             Number.Number = number;
             
         }
 
-        /// <summary>
-        /// Выводит данные о контакте на экран.
-        /// </summary>
-        public void GetInfo()
-        {
-            Console.WriteLine($"Имя: {_name}  Фамилия: {_surname}  Дата рождения: {_dateBirth}  " +
-                              $"E-mail: {_email}  ID VK: {_idVk}  Номер телефона: {Number.Number}" );
-        }
+        
     }
     
 }
