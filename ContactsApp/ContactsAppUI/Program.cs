@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ContactsApp;
+using System.Windows.Forms;
 
 
 namespace ContactsAppUI
@@ -12,7 +13,10 @@ namespace ContactsAppUI
     {
         static void Main()
         {
-
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
+            /*
             Contact contact = new Contact("asd", "sfsd", DateTime.Now, "sadasdasf",
                 "sdadad", 79609721441);
             
@@ -26,6 +30,7 @@ namespace ContactsAppUI
             ProjectManager.SaveToFile(project: data, ProjectManager.DefaultFileName);
 
             System.Threading.Thread.Sleep(10000);
+            */
         }
     }
 }
