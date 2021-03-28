@@ -15,7 +15,7 @@ namespace ContactsAppUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new Contacts());
             /*
             Contact contact = new Contact("asd", "sfsd", DateTime.Now, "sadasdasf",
                 "sdadad", 79609721441);

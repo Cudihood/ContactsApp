@@ -18,7 +18,7 @@ namespace ContactsApp
             get
             {
                 var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                var defaultFileName = appDataFolder + $@"\ContactsApp\contacts.json";
+                var defaultFileName = appDataFolder + $@"\ContactsApp\";
                 return defaultFileName;
             }
         }
@@ -26,19 +26,18 @@ namespace ContactsApp
         /// <summary>
         /// Метод для сохранения информации
         /// </summary>
-        public static void SaveToFile(Project project, string fileName)
+        public static void SaveToFile(Project project, string fileName, string folder)
         {
             //Создаём экземпляр сериализатора
             JsonSerializer serializer = new JsonSerializer();
 
-            var folder = Path.GetDirectoryName(fileName);
-            if (!Directory.Exists(folder))
+            if (!File.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }
 
             //Открываем поток для записи в файл с указанием пути
-            using (StreamWriter sw = new StreamWriter(fileName))
+            using (StreamWriter sw = new StreamWriter(folder+fileName))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 //Вызываем сериализацию и передаем объект, который хотим сериализовать
@@ -49,9 +48,9 @@ namespace ContactsApp
         /// <summary>
         /// Метод для загрузки информации по контактам
         /// </summary>
-        public static Project LoadFromFile(string fileName)
+        public static Project LoadFromFile(string fileName, string folder)
         {
-            if (!File.Exists(fileName))
+            if (!File.Exists(folder + fileName))
             {
                 return new Project();
             }
@@ -59,7 +58,7 @@ namespace ContactsApp
             var project = new Project();
             var serializer = new JsonSerializer();
 
-            using (var sr = new StreamReader(fileName))
+            using (var sr = new StreamReader(folder+fileName))
             using (var reader = new JsonTextReader(sr))
             {
                 project = (Project)serializer.Deserialize<Project>(reader);

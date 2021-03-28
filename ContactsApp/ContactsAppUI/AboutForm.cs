@@ -16,5 +16,10 @@ namespace ContactsAppUI
         {
             InitializeComponent();
         }
+
+        private void linkLabelGutHub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Cudihood/ContactsApp.git");
+        }
     }
 }
