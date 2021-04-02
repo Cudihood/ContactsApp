@@ -24,6 +24,20 @@ namespace ContactsApp
             this.Contacts.Sort();
             return Contacts;
         }
+
+        public List<Contact> SearchBirthdayContact(DateTime dataBirthday)
+        {
+            List<Contact> contactBirthday = new List<Contact>();
+            foreach (var contact in Contacts)
+            {
+                if (contact.DateBirth.Month == dataBirthday.Month && contact.DateBirth.Day == dataBirthday.Day)
+                {
+                    contactBirthday.Add(contact);
+                }
+            }
+
+            return contactBirthday;
+        }
     }
 
 

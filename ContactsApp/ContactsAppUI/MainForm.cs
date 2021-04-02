@@ -45,6 +45,7 @@ namespace ContactsAppUI
             _project = ProjectManager.LoadFromFile("Contacts.json",_defaultFileName);
             _project.SortedContacts();
             SortedContacts();
+            BirthdayContact();
         }
 
         /// <summary>
@@ -248,11 +249,6 @@ namespace ContactsAppUI
                         ContactsListBox.Items.Add(contact.Surname);
                     }
                 }
-
-                if (ContactsListBox.Items.Count == 0)
-                {
-                    SortedContacts();
-                }
             }
             
         }
@@ -280,9 +276,34 @@ namespace ContactsAppUI
             }
         }
 
-        private void BirthdayPanel_Paint(object sender, PaintEventArgs e)
+        /// <summary>
+        /// Выводит сообщение о имениниках.
+        /// </summary>
+        private void BirthdayContact()
         {
-
+            var birthdayContact = _project.SearchBirthdayContact(DateTime.Now);
+            if (birthdayContact.Count != 0)
+            {
+                BirthdayPanel.Visible = true;
+                foreach (var contact in birthdayContact)
+                {
+                    if (contact != birthdayContact.Last())
+                    {
+                        BirthdayTextBox.Text += contact.Surname + ", ";
+                    }
+                    else
+                    {
+                        BirthdayTextBox.Text += contact.Surname;
+                    }
+                }
+            }
+            else
+            {
+                BirthdayPanel.Visible = false;
+            }
+            
+                
+            
         }
     }
 }

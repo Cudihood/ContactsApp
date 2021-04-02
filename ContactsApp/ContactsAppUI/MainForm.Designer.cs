@@ -376,11 +376,10 @@ namespace ContactsAppUI
             this.BirthdayPanel.Controls.Add(this.pictureBox1);
             this.BirthdayPanel.Controls.Add(this.label8);
             this.BirthdayPanel.Controls.Add(this.BirthdayTextBox);
-            this.BirthdayPanel.Location = new System.Drawing.Point(269, 346);
+            this.BirthdayPanel.Location = new System.Drawing.Point(290, 346);
             this.BirthdayPanel.Name = "BirthdayPanel";
-            this.BirthdayPanel.Size = new System.Drawing.Size(463, 105);
+            this.BirthdayPanel.Size = new System.Drawing.Size(442, 105);
             this.BirthdayPanel.TabIndex = 50;
-            this.BirthdayPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.BirthdayPanel_Paint);
             // 
             // pictureBox1
             // 
@@ -396,7 +395,7 @@ namespace ContactsAppUI
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(82, 28);
+            this.label8.Location = new System.Drawing.Point(82, 37);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(132, 13);
@@ -410,10 +409,10 @@ namespace ContactsAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BirthdayTextBox.BackColor = System.Drawing.Color.MediumPurple;
             this.BirthdayTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.BirthdayTextBox.Location = new System.Drawing.Point(82, 47);
+            this.BirthdayTextBox.Location = new System.Drawing.Point(85, 56);
             this.BirthdayTextBox.Name = "BirthdayTextBox";
             this.BirthdayTextBox.ReadOnly = true;
-            this.BirthdayTextBox.Size = new System.Drawing.Size(267, 13);
+            this.BirthdayTextBox.Size = new System.Drawing.Size(246, 13);
             this.BirthdayTextBox.TabIndex = 0;
             // 
             // MainForm
