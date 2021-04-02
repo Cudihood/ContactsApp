@@ -7,7 +7,7 @@ namespace ContactsApp
     /// Класс контакт храняший информацию о имени, фамилии, номера телефона,
     /// даты рождения,e-mail и ID ВКонтакте.
     /// </summary>
-    public class Contact
+    public class Contact : IComparable<Contact>
     {
         /// <summary>
         /// Фамилия контакта.
@@ -187,7 +187,13 @@ namespace ContactsApp
             
         }
 
-        
+
+        public int CompareTo(Contact other)
+        {
+            if (ReferenceEquals(this, other)) return 0;
+            if (ReferenceEquals(null, other)) return 1;
+            return string.Compare(_surname, other._surname, StringComparison.Ordinal);
+        }
     }
     
 }

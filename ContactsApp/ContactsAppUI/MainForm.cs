@@ -11,7 +11,7 @@ using ContactsApp;
 
 namespace ContactsAppUI
 {
-    public partial class Contacts : Form
+    public partial class MainForm : Form
     { 
         /// <summary>
         /// Переменная хранящая все контакты.
@@ -21,15 +21,15 @@ namespace ContactsAppUI
         /// <summary>
         /// Переменная хранящая путь к файлу.
         /// </summary>
-        private string defaultFileName = ProjectManager.DefaultFileName;
+        private string _defaultFileName = ProjectManager.DefaultFileName;
 
         /// <summary>
-        /// Конструктор формы
+        /// Вывод на экран отсортированый список.
         /// </summary>
-        public Contacts()
+        private void SortedContacts()
         {
-            InitializeComponent();
-            _project = ProjectManager.LoadFromFile("Contacts.json",defaultFileName);
+            _project.SortedContacts();
+            ContactsListBox.Items.Clear();
             foreach (var contact in _project.Contacts)
             {
                 ContactsListBox.Items.Add(contact.Surname);
@@ -37,20 +37,22 @@ namespace ContactsAppUI
         }
 
         /// <summary>
+        /// Конструктор формы
+        /// </summary>
+        public MainForm()
+        {
+            InitializeComponent();
+            _project = ProjectManager.LoadFromFile("Contacts.json",_defaultFileName);
+            _project.SortedContacts();
+            SortedContacts();
+        }
+
+        /// <summary>
         /// Выход из программы.
         /// </summary>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult dialog = MessageBox.Show(
-                "Вы действительно хотите выйти из программы?",
-                "Завершение программы",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning
-            );
-            if (dialog == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            this.Close();
         }
 
         /// <summary>
@@ -72,6 +74,7 @@ namespace ContactsAppUI
         private void AddButton_Click(object sender, EventArgs e)
         {
            AddContact();
+           
         }
 
         /// <summary>
@@ -82,6 +85,7 @@ namespace ContactsAppUI
         private void AddContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddContact();
+            
         }
 
         /// <summary>
@@ -89,12 +93,16 @@ namespace ContactsAppUI
         /// </summary>
         private void AddContact()
         {
-            EditContact editContact = new EditContact();
+            ContactForm editContact = new ContactForm();
             editContact.ShowDialog();
 
-            if(editContact.Contact==null)return;
+            if (editContact.Contact == null)
+            {
+                return;
+            }
             _project.Contacts.Add(editContact.Contact);
             ContactsListBox.Items.Add(editContact.Contact.Surname);
+            SortedContacts();
         }
 
         /// <summary>
@@ -102,14 +110,23 @@ namespace ContactsAppUI
         /// </summary>
         private void EditContact()
         {
-            if (_project.Contacts.Count == 0) return;
-            if (ContactsListBox.SelectedIndex == -1) return;
+            if (ContactsListBox.SelectedIndex == -1)
+            {
+                return;
+            }
+
             var selectedIndex = ContactsListBox.SelectedIndex;
-            var editContact = new EditContact
+            var editContact = new ContactForm
             {
                 Contact = _project.Contacts[selectedIndex]
             };
+
             editContact.ShowDialog();
+            if (editContact.Contact == null)
+            {
+                return;
+            }
+
             var updateContact = editContact.Contact;
 
             ContactsListBox.Items.RemoveAt(selectedIndex);
@@ -117,6 +134,7 @@ namespace ContactsAppUI
             _project.Contacts.Insert(selectedIndex, updateContact);
             var contact = updateContact.Surname;
             ContactsListBox.Items.Insert(selectedIndex, contact);
+            SortedContacts();
         }
 
         /// <summary>
@@ -127,6 +145,7 @@ namespace ContactsAppUI
         private void EditButton_Click(object sender, EventArgs e)
         {
             EditContact();
+            
         }
 
         /// <summary>
@@ -137,6 +156,7 @@ namespace ContactsAppUI
         private void EditContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditContact();
+            
         }
 
         /// <summary>
@@ -144,12 +164,15 @@ namespace ContactsAppUI
         /// </summary>
         private void DeleteContact()
         {
-            if (ContactsListBox.Items.Count <= 0) return;
+            if (ContactsListBox.Items.Count <= 0)
+            {
+                return;
+            }
 
             var selectedIndex = ContactsListBox.SelectedIndex;
             DialogResult result = MessageBox.Show("Вы хотите удалить контакт " +
                                                   _project.Contacts[selectedIndex].Surname + "?",
-                "Verification", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                "Подтверждение", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.OK)
             {
@@ -165,17 +188,19 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void ContactsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ContactsListBox.SelectedIndex == -1) return;
-
-            if (ContactsListBox.Items.Count>0)
+            if (ContactsListBox.SelectedIndex == -1)
             {
-                NameTextBox.Text = _project.Contacts[ContactsListBox.SelectedIndex].Name;
-                SurnameTextBox.Text = _project.Contacts[ContactsListBox.SelectedIndex].Surname;
-                DateTimePicker1.Value = _project.Contacts[ContactsListBox.SelectedIndex].DateBirth;
-                EmailTextBox.Text = _project.Contacts[ContactsListBox.SelectedIndex].Email;
-                NumberTextBox.Text = _project.Contacts[ContactsListBox.SelectedIndex].Number.Number.ToString();
-                IdTextBox.Text = _project.Contacts[ContactsListBox.SelectedIndex].IdVk;
+                return;
             }
+
+            var contact = _project.Contacts[ContactsListBox.SelectedIndex];
+            NameTextBox.Text = contact.Name;
+            SurnameTextBox.Text = contact.Surname;
+            DateTimePicker1.Value = contact.DateBirth;
+            EmailTextBox.Text = contact.Email;
+            NumberTextBox.Text = contact.Number.Number.ToString();
+            IdTextBox.Text = contact.IdVk;
+            
             
         }
 
@@ -199,10 +224,65 @@ namespace ContactsAppUI
             DeleteContact();
         }
 
-        
-        private void Contacts_FormClosed(object sender, FormClosedEventArgs e)
+        /// <summary>
+        /// Поиск контакта.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
-            ProjectManager.SaveToFile(_project,"Contacts.json", defaultFileName);
+            ContactsListBox.Items.Clear();
+
+            if (FindTextBox.Text == null)
+            {
+                SortedContacts();
+                return;
+            }
+            else
+            {
+                foreach (var contact in _project.Contacts)
+                {
+
+                    if (contact.Surname.Contains(FindTextBox.Text))
+                    {
+                        ContactsListBox.Items.Add(contact.Surname);
+                    }
+                }
+
+                if (ContactsListBox.Items.Count == 0)
+                {
+                    SortedContacts();
+                }
+            }
+            
+        }
+
+        /// <summary>
+        /// Выход из программы.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Contacts_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show(
+                "Вы действительно хотите выйти из программы?",
+                "Завершение программы",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+            if (dialog == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                ProjectManager.SaveToFile(_project, "Contacts.json", _defaultFileName);
+            }
+        }
+
+        private void BirthdayPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
