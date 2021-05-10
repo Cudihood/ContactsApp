@@ -36,6 +36,11 @@ namespace ContactsApp
         private string _idVk;
 
         /// <summary>
+        /// Переменная хранящая некорректные символы для Имени и Фамилии.
+        /// </summary>
+        string _invalidСharacter = @"0123456789!№%:,.;()_+=-@#$%^&*\|/?<>§±~][`";
+
+        /// <summary>
         /// Возвращает и задает имя контакта.
         /// </summary>
         public string Name
@@ -43,14 +48,25 @@ namespace ContactsApp
             get { return _name; }
             set
             {
+                for (int i = 0; i < value.Length; i++)
+                {
+                    foreach (var symbol in _invalidСharacter)
+                    {
+                        if (value[i] == symbol)
+                        {
+                            throw new ArgumentException("Имя должно состоять только из латинских букв или кириллицы");
+                        }
+                    }
+                }
                 if (value == string.Empty)
                 {
-                    throw new ArgumentException("Ошибка. Пустая строка");
+                    throw new ArgumentException("Пустая строка");
                 }
                 if (value.Length > 50)
                 {
-                    throw new ArgumentException("Ошибка. Имя не должно превышать 50 символов");
+                    throw new ArgumentException("Имя не должно превышать 50 символов");
                 }
+                
                 else
                 {
                     value= value.Substring(0, 1).ToUpper() + value.Remove(0, 1);
@@ -67,13 +83,23 @@ namespace ContactsApp
             get { return _surname; }
             set
             {
+                for (int i = 0; i < value.Length; i++)
+                {
+                    foreach (var symbol in _invalidСharacter)
+                    {
+                        if (value[i] == symbol)
+                        {
+                            throw new ArgumentException("Фамилия должна состоять только из латинских букв или кириллицы");
+                        }
+                    }
+                }
                 if (value == string.Empty)
                 {
-                    throw new ArgumentException("Ошибка. Пустая строка");
+                    throw new ArgumentException("Пустая строка");
                 }
                 if (value.Length > 50)
                 {
-                    throw new ArgumentException("Ошибка. Фамилия не должно превышать 50 символов");
+                    throw new ArgumentException("Фамилия не должно превышать 50 символов");
                 }
                 else
                 {
@@ -93,11 +119,15 @@ namespace ContactsApp
             {
                 if (value == string.Empty)
                 {
-                    throw new ArgumentException("Ошибка. Пустая строка");
+                    throw new ArgumentException("Пустая строка");
+                }
+                if (!value.Contains("@"))
+                {
+                    throw new ArgumentException("E-mail должен содержать '@' ");
                 }
                 if (value.Length > 50)
                 {
-                    throw new ArgumentException("Ошибка. E-mail не должно превышать 50 символов");
+                    throw new ArgumentException("E-mail не должно превышать 50 символов");
                 }
                 else
                 {
@@ -117,11 +147,11 @@ namespace ContactsApp
             {
                 if (value == string.Empty)
                 {
-                    throw new ArgumentException("Ошибка. Пустая строка");
+                    throw new ArgumentException("Пустая строка");
                 }
-                if (value.Length > 50)
+                if (value.Length > 15)
                 {
-                    throw new ArgumentException("Ошибка. ID не должно превышать 15 символов");
+                    throw new ArgumentException("ID не должно превышать 15 символов");
                 }
                 else
                 {
@@ -140,11 +170,11 @@ namespace ContactsApp
             {
                 if (value > DateTime.Now)
                 {
-                    throw new ArgumentException("Ошибка. Дата не может быть более текущей даты.");
+                    throw new ArgumentException("Дата не может быть больше текущей даты.");
                 }
                 else if (value.Year < 1900)
                 {
-                    throw new ArgumentException("Ошибка. Дата не может быть меньше 1900 года.");
+                    throw new ArgumentException("Дата не может быть меньше 1900 года.");
                 }
                 else
                 {

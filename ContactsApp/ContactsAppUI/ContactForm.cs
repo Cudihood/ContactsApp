@@ -18,15 +18,10 @@ namespace ContactsAppUI
         /// </summary>
         private Contact _contact;
 
-        /// <summary>
-        /// Переменная хранящая некорректные символы для Имени и Фамилии.
-        /// </summary>
-        string _invalidСharacter = @"0123456789!№%:,.;()_+=-@#$%^&*\|/?<>§±~][`";
-
-
         public ContactForm()
         {
             InitializeComponent();
+            _contact = new Contact();
 
         }
 
@@ -52,7 +47,7 @@ namespace ContactsAppUI
                     EmailTextBox.Text = Contact.Email;
             }
         }
-        
+
         /// <summary>
         /// Добовляет или изменяет данные у пользователя
         /// </summary>
@@ -60,16 +55,30 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void Okbutton_Click(object sender, EventArgs e)
         {
-            _contact = new Contact();
-            _contact.Name = NameTextBox.Text;
-            _contact.Surname = SurnameTextBox.Text;
-            _contact.DateBirth = DateTimePicker.Value;
-            _contact.Email = EmailTextBox.Text;
-            _contact.IdVk = IdTextBox.Text;
-            _contact.Number.Number = Convert.ToInt64(NumberTextBox.Text);
+
+            try
+            {
+                _contact.DateBirth = DateTimePicker.Value;
+                _contact.Name = NameTextBox.Text;
+                _contact.Surname = SurnameTextBox.Text;
+                _contact.Email = EmailTextBox.Text;
+                _contact.IdVk = IdTextBox.Text;
+                _contact.Number.Number = Convert.ToInt64(NumberTextBox.Text);
+
+            }
+            catch (ArgumentException exception)
+            {
+                MessageBox.Show($"{exception.Message}", "Ошибка", MessageBoxButtons.OK);
+                return;
+            }
+            catch (FormatException exception)
+            {
+                MessageBox.Show("Строка должна содержать только цифры.", "Ошибка", MessageBoxButtons.OK);
+                return;
+            }
             
-            DialogResult = DialogResult.OK;
-            this.Close();
+
+            Close();
         }
 
         /// <summary>
@@ -90,32 +99,15 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void SurnameTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (SurnameTextBox.Text.Length > 50)
+            try
+            {
+                _contact.Surname = SurnameTextBox.Text;
+                SurnameTextBox.BackColor = Color.White;
+            }
+            catch 
             {
                 SurnameTextBox.BackColor = Color.Red;
-                return;
-            }
-            else
-            {
-                SurnameTextBox.BackColor = Color.White;
-            }
-
-            bool check = false;
-            for (int i = 0; i < SurnameTextBox.Text.Length; i++)
-            {
-                foreach (var symbol in _invalidСharacter)
-                {
-                    if (SurnameTextBox.Text[i] == symbol)
-                    {
-                        SurnameTextBox.BackColor = Color.Red;
-                        check = true;
-                    }
-                }
-            }
-
-            if (check != true)
-            {
-                SurnameTextBox.BackColor = Color.White;
+                
             }
         }
 
@@ -126,32 +118,14 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (NameTextBox.Text.Length > 50)
+            try
+            {
+                _contact.Name = NameTextBox.Text;
+                NameTextBox.BackColor = Color.White;
+            }
+            catch 
             {
                 NameTextBox.BackColor = Color.Red;
-                return;
-            }
-            else
-            {
-                NameTextBox.BackColor = Color.White;
-            }
-
-            bool check = false;
-            for (int i = 0; i < NameTextBox.Text.Length; i++)
-            {
-                foreach (var symbol in _invalidСharacter)
-                {
-                    if (NameTextBox.Text[i] == symbol)
-                    {
-                        NameTextBox.BackColor = Color.Red;
-                        check = true;
-                    }
-                }
-            }
-
-            if (check != true)
-            {
-                NameTextBox.BackColor = Color.White;
             }
         }
 
@@ -162,27 +136,17 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void NumberTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (NumberTextBox.Text == String.Empty)
+           
+            try
             {
+                _contact.Number.Number = Convert.ToInt64(NumberTextBox.Text);
                 NumberTextBox.BackColor = Color.White;
-                return;
             }
-            if (NumberTextBox.Text[0] != '7' || NumberTextBox.Text.Length != 11)
+            catch 
             {
                 NumberTextBox.BackColor = Color.Red;
             }
-            else
-            {
-                for (int i = 0; i < NumberTextBox.Text.Length; i++)
-                {
-                    if (!Char.IsDigit(NumberTextBox.Text[i]))
-                    {
-                        NumberTextBox.BackColor = Color.Red;
-                        return;
-                    }
-                }
-                NumberTextBox.BackColor = Color.White;
-            }
+            
         }
 
         /// <summary>
@@ -192,14 +156,16 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void EmailTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (EmailTextBox.Text.Length > 50 || !EmailTextBox.Text.Contains("@"))
+            try
+            {
+                _contact.Email = EmailTextBox.Text;
+                EmailTextBox.BackColor = Color.White;
+            }
+            catch
             {
                 EmailTextBox.BackColor = Color.Red;
             }
-            else
-            {
-                EmailTextBox.BackColor = Color.White;
-            }
+            
         }
 
         /// <summary>
@@ -209,14 +175,16 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void IdTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (IdTextBox.Text.Length > 15)
+            try
+            {
+                _contact.IdVk = IdTextBox.Text;
+                IdTextBox.BackColor = Color.White;
+            }
+            catch 
             {
                 IdTextBox.BackColor = Color.Red;
             }
-            else
-            {
-                IdTextBox.BackColor = Color.White;
-            }
+            
         }
     }
 }

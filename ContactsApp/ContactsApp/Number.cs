@@ -22,9 +22,10 @@ namespace ContactsApp
             get { return _number; }
             set
             {
+                
                 if (value < 70000000000 || value > 79999999999)
                 {
-                    throw new ArgumentException("Ошибка. Номер должен начинаться с 7 и содержать 11 цифр");
+                    throw new ArgumentException("Номер должен начинаться с 7 и содержать 11 цифр");
                 }
                 else
                 {
