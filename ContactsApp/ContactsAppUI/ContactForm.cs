@@ -71,7 +71,7 @@ namespace ContactsAppUI
                 MessageBox.Show($"{exception.Message}", "Ошибка", MessageBoxButtons.OK);
                 return;
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 MessageBox.Show("Строка должна содержать только цифры.", "Ошибка", MessageBoxButtons.OK);
                 return;

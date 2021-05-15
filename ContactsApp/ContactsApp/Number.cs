@@ -22,7 +22,10 @@ namespace ContactsApp
             get { return _number; }
             set
             {
-                
+                if (value == null)
+                {
+                    throw new ArgumentException("Пустая строка");
+                }
                 if (value < 70000000000 || value > 79999999999)
                 {
                     throw new ArgumentException("Номер должен начинаться с 7 и содержать 11 цифр");

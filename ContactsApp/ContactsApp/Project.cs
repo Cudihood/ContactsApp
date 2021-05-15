@@ -25,6 +25,11 @@ namespace ContactsApp
             return Contacts;
         }
 
+        /// <summary>
+        /// Поиск дня рождения контакта.
+        /// </summary>
+        /// <param name="dataBirthday"></param>
+        /// <returns></returns>
         public List<Contact> SearchBirthdayContact(DateTime dataBirthday)
         {
             List<Contact> contactBirthday = new List<Contact>();
