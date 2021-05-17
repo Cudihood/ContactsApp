@@ -4,7 +4,7 @@ using System.Text;
 using NUnit.Framework;
 using ContactsApp;
 
-namespace ContactsApp.UnitTests
+namespace ContactsApp.UnitTests 
 {
     /// <summary>
     /// Класс тестов для тестирования класса номер.
@@ -12,37 +12,21 @@ namespace ContactsApp.UnitTests
     [TestFixture]
     public class NumberTest
     {
-        private Contact _contact;
 
-        public void Setup()
-        {
-            _contact = new Contact();
-        }
-
-        [Test(Description = "Позитивный тест геттер Nomber")]
-        public void TestNomberGet_CorrectValue()
+        [Test(Description = "Позитивный тест геттер/сеттера Number")]
+        public void TestNumberGet_CorrectValue()
         {
             //Setup
-            Setup();
-            var expected = 77777777777;
-            _contact.Number.Number = expected;
+            Contact _contact = new Contact();
+            var expected = 79609721441;
+            
 
             //Act
+            _contact.Number.Number = expected;
             var actual = _contact.Number.Number;
 
             //Assert
-            Assert.AreEqual(expected,actual,"Геттер Nomber возвращает неправильный номер");
-        }
-
-        [Test(Description = "Позитивный тест сеттер Nomber")]
-        public void TestNomberSet_CorrectValue()
-        {
-            //Setup
-            Setup();
-            _contact.Number.Number = 77777777777;
-
-            //Assert
-            Assert.AreEqual(77777777777, _contact.Number.Number, "Геттер Nomber возвращает неправильный номер");
+            Assert.AreEqual(expected,actual, "Геттер Number возвращает или присваивает неправильный номер");
         }
 
         [TestCase(70342, "Должно возникать исключение если номер - содержит меньше 11 цифр",
@@ -53,16 +37,16 @@ namespace ContactsApp.UnitTests
             TestName = "Присвоение неправильного номера содержащего больше 11 цифр")]
         [TestCase(null, "Должно возникать исключение если номер - пустая строка",
             TestName = "Присвоение пустой строки в качестве номера")]
-        public void TestNomberSet_ArgumentException(long wrongNomber, string message)
+        public void TestNumberSet_ArgumentException(long wrongNumber, string message)
         {
             //Setup
-            Setup();
+            Contact _contact = new Contact();
 
             //Assert
             Assert.Throws<ArgumentException>(() =>
                 {
                     //Act
-                    _contact.Number.Number = wrongNomber;
+                    _contact.Number.Number = wrongNumber;
                 },
                 message);
         }

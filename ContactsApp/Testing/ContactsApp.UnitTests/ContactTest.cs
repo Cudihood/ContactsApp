@@ -10,38 +10,21 @@ namespace ContactsApp.UnitTests
     [TestFixture]
     public class ContactTest
     {
-        private Contact _contact;
 
-        
-        public void Setup()
-        {
-            _contact = new Contact();
-        }
-
-        [Test(Description = "Позитивный тест геттера Surname")]
+        [Test(Description = "Позитивный тест геттера/сеттера Surname")]
         public void TestSurnameGet_CorrectValue()
         {
             //Setup
-            Setup();
+            Contact _contact = new Contact();
             var expected = "Соболев";
-            _contact.Surname = expected;
+            
             
             //Act
+            _contact.Surname = expected;
             var actual = _contact.Surname;
 
             //Assert
-            Assert.AreEqual(expected,actual, "Геттер Surname возвращает неправильную фамилию");
-        }
-
-        [Test(Description = "Позитивный тест сеттера Surname")]
-        public void TestSurnameSet_CorrectValue()
-        {
-            //Setup
-            Setup();
-            _contact.Surname = "Соболев";
-            
-            //Assert
-            Assert.AreEqual("Соболев", _contact.Surname, "Сеттер Surname присваивает неправильную фамилию");
+            Assert.AreEqual(expected,actual, "Геттер Surname возвращает или присваивает неправильную фамилию");
         }
 
         [TestCase("Соболев!", "Должно возникать исключение, если фамилия - имеет не корректные символы",
@@ -54,7 +37,7 @@ namespace ContactsApp.UnitTests
         public void TestSurnameSet_ArgumentException(string wrongSurname, string message)
         {
             //Setup
-            Setup();
+            Contact _contact = new Contact();
 
             //Assert
             Assert.Throws<ArgumentException>(() =>
@@ -65,30 +48,20 @@ namespace ContactsApp.UnitTests
                 message);
         }
 
-        [Test(Description = "Позитивный тест сеттера Name")]
-        public void TestNameSet_CorrectValue()
-        {
-            //Setup
-            Setup();
-            _contact.Name = "Илья";
-            
-            //Assert
-            Assert.AreEqual("Илья", _contact.Name, "Сеттер Name присваивает неправильное имя");
-        }
-
-        [Test(Description = "Позитивный тест геттера Name")]
+        [Test(Description = "Позитивный тест геттера/сеттера Name")]
         public void TestNameGet_CorrectValue()
         {
             //Setup
-            Setup();
+            Contact _contact = new Contact();
             var expected = "Илья";
-            _contact.Name = expected;
+            
 
             //Act
+            _contact.Name = expected;
             var actual = _contact.Name;
 
                 //Assert
-            Assert.AreEqual(expected, actual, "Геттер Name возвращает неправильное имя");
+            Assert.AreEqual(expected, actual, "Геттер Name возвращает или присваивает неправильное имя");
         }
 
         [TestCase("Илья!", "Должно возникать исключение, если Имя - имеет не корректные символы",
@@ -101,7 +74,7 @@ namespace ContactsApp.UnitTests
         public void TestNameSet_ArgumentException(string wrongName, string message)
         {
             //Setup
-            Setup();
+            Contact _contact = new Contact();
 
             //Assert
             Assert.Throws<ArgumentException>(() =>
@@ -112,30 +85,21 @@ namespace ContactsApp.UnitTests
                 message);
         }
 
-        [Test(Description = "Позитивный тест сеттера Email")]
-        public void TestEmailSet_CorrectValue()
-        {
-            //Setup
-            Setup();
-            _contact.Email = "ilya@mail.ru";
 
-            //Assert
-            Assert.AreEqual("ilya@mail.ru", _contact.Email, "Сеттер Email присваивает неправильный Email");
-        }
-
-        [Test(Description = "Позитивный тест геттера Name")]
+        [Test(Description = "Позитивный тест геттера/сеттера Email")]
         public void TestEmailGet_CorrectValue()
         {
             //Setup
-            Setup();
+            Contact _contact = new Contact();
             var expected = "ilya@mail.ru";
-            _contact.Email = expected;
+            
 
             //Act
+            _contact.Email = expected;
             var actual = _contact.Email;
 
             //Assert
-            Assert.AreEqual(expected, actual, "Геттер Email возвращает неправильный Email");
+            Assert.AreEqual(expected, actual, "Геттер Email возвращает или присваивает неправильный Email");
         }
 
         [TestCase("ilyamail.ru", "Должно возникать исключение, если Email - не имеет @",
@@ -148,7 +112,7 @@ namespace ContactsApp.UnitTests
         public void TestEmailSet_ArgumentException(string wrongEmail, string message)
         {
             //Setup
-            Setup();
+            Contact _contact = new Contact();
 
             //Assert
             Assert.Throws<ArgumentException>(() =>
@@ -159,30 +123,20 @@ namespace ContactsApp.UnitTests
                 message);
         }
 
-        [Test(Description = "Позитивный тест сеттера IdVk")]
-        public void TestIdVkSet_CorrectValue()
-        {
-            //Setup
-            Setup();
-            _contact.IdVk = "danilmordovin2000";
-
-            //Assert
-            Assert.AreEqual("danilmordovin2000", _contact.IdVk, "Сеттер IdVk присваивает неправильный IdVk");
-        }
-
-        [Test(Description = "Позитивный тест геттера Name")]
+        [Test(Description = "Позитивный тест геттера/сеттера IdVk")]
         public void TestIdVkGet_CorrectValue()
         {
             //Setup
-            Setup();
-            var expected = "danilmordovin2000";
-            _contact.IdVk = expected;
+            Contact _contact = new Contact();
+            var expected = "danilmordon2000";
+            
 
             //Act
+            _contact.IdVk = expected;
             var actual = _contact.IdVk;
 
             //Assert
-            Assert.AreEqual(expected, actual, "Геттер IdVk возвращает неправильный IdVk");
+            Assert.AreEqual(expected, actual, "Геттер IdVk возвращает или присваивает неправильный IdVk");
         }
 
         [TestCase("", "Должно возникать исключение, если IdVk - пустая строка",
@@ -193,7 +147,7 @@ namespace ContactsApp.UnitTests
         public void TestIdVkSet_ArgumentException(string wrongIdVk, string message)
         {
             //Setup
-            Setup();
+            Contact _contact = new Contact();
 
             //Assert
             Assert.Throws<ArgumentException>(() =>
@@ -204,33 +158,20 @@ namespace ContactsApp.UnitTests
                 message);
         }
 
-        [Test(Description = "Позитивный тест сеттера DateBirth")]
-        public void TestDateBirthSet_CorrectValue()
-        {
-            //Setup
-            Setup();
-            var expected = new DateTime(2000, 10, 20);
 
-            //Act
-            _contact.DateBirth = expected;
-
-            //Assert
-            Assert.AreEqual(expected, _contact.DateBirth, "Сеттер DateBirth присваивает неправильный DateBirth");
-        }
-
-        [Test(Description = "Позитивный тест геттера DateBirth")]
+        [Test(Description = "Позитивный тест геттера/сеттера DateBirth")]
         public void TestDateBirthGet_CorrectValue()
         {
             //Setup
-            Setup();
+            Contact _contact = new Contact();
             var expected = new DateTime(2000,1,1);
-            _contact.DateBirth = expected;
 
             //Act
+            _contact.DateBirth = expected;
             var actual = _contact.DateBirth;
 
             //Assert
-            Assert.AreEqual(expected, actual, "Геттер DateBirth возвращает неправильный DateBirth");
+            Assert.AreEqual(expected, actual, "Геттер DateBirth возвращает или присваивает неправильный DateBirth");
         }
 
         [TestCase("1800,1,1", "Должно возникать исключение, если DateBirth - меньше 1900 года",
@@ -241,7 +182,7 @@ namespace ContactsApp.UnitTests
         public void TestDateBirthSet_ArgumentException(DateTime wrongDateBirth, string message)
         {
             //Setup
-            Setup();
+            Contact _contact = new Contact();
 
             //Assert
             Assert.Throws<ArgumentException>(() =>

@@ -7,7 +7,7 @@ namespace ContactsApp
     /// Класс контакт храняший информацию о имени, фамилии, номера телефона,
     /// даты рождения,e-mail и ID ВКонтакте.
     /// </summary>
-    public class Contact : IComparable<Contact>
+    public class Contact : IComparable<Contact>, IEquatable<Contact>
     {
         /// <summary>
         /// Фамилия контакта.
@@ -131,7 +131,6 @@ namespace ContactsApp
                 }
                 else
                 {
-                    value = value.Substring(0, 1).ToUpper() + value.Remove(0, 1);
                     _email = value;
                 }
             }
@@ -223,6 +222,42 @@ namespace ContactsApp
             if (ReferenceEquals(this, other)) return 0;
             if (ReferenceEquals(null, other)) return 1;
             return string.Compare(_surname, other._surname, StringComparison.Ordinal);
+        }
+
+        public bool Equals(Contact other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return _surname == other._surname &&
+                   _name == other._name && 
+                   _dateBirth.Equals(other._dateBirth) &&
+                   _email == other._email &&
+                   _idVk == other._idVk &&
+                   _invalidСharacter == other._invalidСharacter &&
+                   Equals(Number, other.Number);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Contact) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (_surname != null ? _surname.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (_name != null ? _name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ _dateBirth.GetHashCode();
+                hashCode = (hashCode * 397) ^ (_email != null ? _email.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (_idVk != null ? _idVk.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (_invalidСharacter != null ? _invalidСharacter.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Number != null ? Number.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
     

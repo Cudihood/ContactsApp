@@ -30,6 +30,7 @@ namespace ContactsApp
         {
             //Создаём экземпляр сериализатора
             JsonSerializer serializer = new JsonSerializer();
+            serializer.Formatting = Formatting.Indented;
 
             if (!File.Exists(folder))
             {
@@ -50,24 +51,33 @@ namespace ContactsApp
         /// </summary>
         public static Project LoadFromFile(string fileName, string folder)
         {
-            if (!File.Exists(folder + fileName))
+            try
             {
-                return new Project();
-            }
 
-            var project = new Project();
-            var serializer = new JsonSerializer();
-
-            using (var sr = new StreamReader(folder+fileName))
-            using (var reader = new JsonTextReader(sr))
-            {
-                project = (Project)serializer.Deserialize<Project>(reader);
-                if (project == null)
+                if (!File.Exists(folder + fileName))
                 {
                     return new Project();
                 }
+
+                var project = new Project();
+                var serializer = new JsonSerializer();
+
+                using (var sr = new StreamReader(folder + fileName))
+                using (var reader = new JsonTextReader(sr))
+                {
+                    project = (Project) serializer.Deserialize<Project>(reader);
+                    if (project == null)
+                    {
+                        return new Project();
+                    }
+                }
+
+                return project;
             }
-            return project;
+            catch(Exception)
+            {
+                return new Project();
+            }
         }
     }
 }
