@@ -16,37 +16,25 @@ namespace ContactsApp.UnitTests
     public class ProjectManagerTest
     {
 
-        /*
-         public void CorrectProject()
-         {
-             var project = new Project();
-             var contact = new Contact("Иван",
-                 "Иванов",
-                 new DateTime(2001, 1, 1),
-                 "ivan@mail.ru",
-                 "idivan",
-                 79858456543);
-             project.Contacts.Add(contact);
-
-             contact = new Contact("Артем",
-                 "Висельчак",
-                 new DateTime(2011, 1, 1),
-                 "artem@mail.ru",
-                 "idartem",
-                 79854456543);
-             project.Contacts.Add(contact);
-
-             var location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-             var folder = $"{location}\\TestData\\";
-             ProjectManager.SaveToFile(project, "CorrectProjectFile.json", folder);
-         }
-        */
+        /// <summary>
+        /// Корректное имя файла
+        /// </summary>
         private const string CorrectProjectFilename = "CorrectProjectFile.json";
 
+        /// <summary>
+        /// Некорректный файл
+        /// </summary>
         private const string UncorrectProjectFilename = "UncorrectProjectFile.json";
 
+        /// <summary>
+        /// Корректный путь 
+        /// </summary>
         private const string CorrectProjectFolder = @"TestData\";
 
+        /// <summary>
+        /// Корректные данные
+        /// </summary>
+        /// <returns></returns>
         private Project GetCorrectProject()
         {
             var correctProject = new Project();
