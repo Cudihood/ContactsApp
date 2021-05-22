@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,7 +38,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>notebookwithcontacts_81077.ico</ApplicationIcon>
+    <ApplicationIcon>notebookwithcontacts.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -104,9 +106,20 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="notebookwithcontacts.ico" />
     <Content Include="notebookwithcontacts_81077.ico" />
     <None Include="Resources\documentediting_editdocuments_text_documentedi_2820.png" />
     <None Include="Resources\plus_40632.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>del /q "$(SolutionDir)InstallScripts\Release"
+md "$(SolutionDir)InstallScripts\Release"
+xcopy "$(ProjectDir)$(OutDir)*.dll" "$(SolutionDir)InstallScripts\Release"
+xcopy "$(ProjectDir)$(OutDir)*.exe" "$(SolutionDir)InstallScripts\Release"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

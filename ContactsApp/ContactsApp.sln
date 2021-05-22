@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{C6A4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsApp.UnitTests", "Testing\ContactsApp.UnitTests\ContactsApp.UnitTests.csproj", "{2CD45F66-E669-4C25-8F61-01D74A2D798B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{6A05D856-D89F-4D21-AAF0-A166A619BC7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{2CD45F66-E669-4C25-8F61-01D74A2D798B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CD45F66-E669-4C25-8F61-01D74A2D798B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CD45F66-E669-4C25-8F61-01D74A2D798B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A05D856-D89F-4D21-AAF0-A166A619BC7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A05D856-D89F-4D21-AAF0-A166A619BC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A05D856-D89F-4D21-AAF0-A166A619BC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A05D856-D89F-4D21-AAF0-A166A619BC7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

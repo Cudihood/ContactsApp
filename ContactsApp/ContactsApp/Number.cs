@@ -23,7 +23,9 @@ namespace ContactsApp
         get { return _number; }
         set
         {
+#pragma warning disable CS0472 // Результат значения всегда одинаковый, так как значение этого типа никогда не равно NULL
             if (value == null)
+#pragma warning restore CS0472 // Результат значения всегда одинаковый, так как значение этого типа никогда не равно NULL
             {
                 throw new ArgumentException("Пустая строка");
             }
