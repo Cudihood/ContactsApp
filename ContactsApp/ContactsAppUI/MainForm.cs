@@ -30,11 +30,18 @@ namespace ContactsAppUI
         {
             _project.SortedContacts();
             ContactsListBox.Items.Clear();
+            CurrentContacts.Clear();
             foreach (var contact in _project.Contacts)
             {
                 ContactsListBox.Items.Add(contact.Surname);
+                CurrentContacts.Add(contact);
             }
         }
+
+        /// <summary>
+        /// Список актуальных контактов
+        /// </summary>
+        private List<Contact> CurrentContacts { get; set; } = new List<Contact>();
 
         /// <summary>
         /// Конструктор формы
@@ -43,8 +50,7 @@ namespace ContactsAppUI
         {
             InitializeComponent();
             _project = ProjectManager.LoadFromFile("Contacts.json",_defaultFileName);
-            _project.SortedContacts();
-            SortedContacts();
+            FindContacts();
             BirthdayContact();
         }
 
@@ -75,7 +81,6 @@ namespace ContactsAppUI
         private void AddButton_Click(object sender, EventArgs e)
         {
            AddContact();
-           
         }
 
         /// <summary>
@@ -86,7 +91,6 @@ namespace ContactsAppUI
         private void AddContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddContact();
-            
         }
 
         /// <summary>
@@ -95,15 +99,16 @@ namespace ContactsAppUI
         private void AddContact()
         {
             ContactForm editContact = new ContactForm();
-            editContact.ShowDialog();
+            var result = editContact.ShowDialog();
 
-            if (editContact.Contact == null)
+            if (result != DialogResult.OK) 
             {
                 return;
             }
             _project.Contacts.Add(editContact.Contact);
             ContactsListBox.Items.Add(editContact.Contact.Surname);
-            SortedContacts();
+            CurrentContacts.Add(editContact.Contact);
+            FindContacts();
         }
 
         /// <summary>
@@ -119,23 +124,26 @@ namespace ContactsAppUI
             var selectedIndex = ContactsListBox.SelectedIndex;
             var editContact = new ContactForm
             {
-                Contact = _project.Contacts[selectedIndex]
+                Contact = (Contact)CurrentContacts[selectedIndex].Clone()
             };
 
-            editContact.ShowDialog();
-            if (editContact.Contact == null)
+            var result = editContact.ShowDialog();
+            if (result != DialogResult.OK) 
             {
                 return;
             }
 
             var updateContact = editContact.Contact;
-
+            var selectedContact = CurrentContacts[selectedIndex];
             ContactsListBox.Items.RemoveAt(selectedIndex);
-            _project.Contacts.RemoveAt(selectedIndex);
+            _project.Contacts.Remove(selectedContact);
+            CurrentContacts.RemoveAt(selectedIndex);
             _project.Contacts.Insert(selectedIndex, updateContact);
             var contact = updateContact.Surname;
             ContactsListBox.Items.Insert(selectedIndex, contact);
-            SortedContacts();
+            CurrentContacts.Insert(selectedIndex, updateContact);
+            FindContacts();
+            ContactsListBox.SelectedIndex = selectedIndex;
         }
 
         /// <summary>
@@ -146,7 +154,6 @@ namespace ContactsAppUI
         private void EditButton_Click(object sender, EventArgs e)
         {
             EditContact();
-            
         }
 
         /// <summary>
@@ -157,7 +164,6 @@ namespace ContactsAppUI
         private void EditContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditContact();
-            
         }
 
         /// <summary>
@@ -169,16 +175,18 @@ namespace ContactsAppUI
             {
                 return;
             }
-
             var selectedIndex = ContactsListBox.SelectedIndex;
+            var selectedContact = CurrentContacts[selectedIndex];
             DialogResult result = MessageBox.Show("Вы хотите удалить контакт " +
-                                                  _project.Contacts[selectedIndex].Surname + "?",
+                                                  CurrentContacts[selectedIndex].Surname + "?",
                 "Подтверждение", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.OK)
             {
-                _project.Contacts.RemoveAt(selectedIndex);
+                _project.Contacts.Remove(selectedContact);
                 ContactsListBox.Items.RemoveAt(selectedIndex);
+                CurrentContacts.RemoveAt(selectedIndex);
+                ContactsListBox.SelectedIndex = selectedIndex - 1;
             }
         }
 
@@ -193,16 +201,13 @@ namespace ContactsAppUI
             {
                 return;
             }
-
-            var contact = _project.Contacts[ContactsListBox.SelectedIndex];
+            var contact = CurrentContacts[ContactsListBox.SelectedIndex];
             NameTextBox.Text = contact.Name;
             SurnameTextBox.Text = contact.Surname;
             DateTimePicker1.Value = contact.DateBirth;
             EmailTextBox.Text = contact.Email;
             NumberTextBox.Text = contact.Number.Number.ToString();
             IdTextBox.Text = contact.IdVk;
-            
-            
         }
 
         /// <summary>
@@ -226,31 +231,38 @@ namespace ContactsAppUI
         }
 
         /// <summary>
+        /// Метод поиска контактов
+        /// </summary>
+        private void FindContacts()
+        {
+            SortedContacts();
+            if (FindTextBox.Text == null)
+            {
+                return;
+            }
+            else
+            {
+                ContactsListBox.Items.Clear();
+                CurrentContacts.Clear();
+                foreach (var contact in _project.Contacts)
+                {
+                    if (contact.Surname.Contains(FindTextBox.Text))
+                    {
+                        ContactsListBox.Items.Add(contact.Surname);
+                        CurrentContacts.Add(contact);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Поиск контакта.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
-            ContactsListBox.Items.Clear();
-
-            if (FindTextBox.Text == null)
-            {
-                SortedContacts();
-                return;
-            }
-            else
-            {
-                foreach (var contact in _project.Contacts)
-                {
-
-                    if (contact.Surname.Contains(FindTextBox.Text))
-                    {
-                        ContactsListBox.Items.Add(contact.Surname);
-                    }
-                }
-            }
-            
+            FindContacts();
         }
 
         /// <summary>
@@ -301,9 +313,6 @@ namespace ContactsAppUI
             {
                 BirthdayPanel.Visible = false;
             }
-            
-                
-            
         }
     }
 }

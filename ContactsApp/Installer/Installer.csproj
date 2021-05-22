@@ -66,7 +66,6 @@
   <PropertyGroup>
     <PostBuildEvent>del /q "$(SolutionDir)InstallScripts\Installers"
 md "$(SolutionDir)InstallScripts\Installers"
-"$(SolutionDir)packages\Tools.InnoSetup.6.1.2\tools\ISCC.exe" 
-"$(SolutionDir)InstallScripts\installer.iss"</PostBuildEvent>
+"$(SolutionDir)packages\Tools.InnoSetup.6.1.2\tools\ISCC.exe" "$(SolutionDir)InstallScripts\installer.iss"</PostBuildEvent>
   </PropertyGroup>
 </Project>

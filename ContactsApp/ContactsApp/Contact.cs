@@ -7,7 +7,7 @@ namespace ContactsApp
     /// Класс контакт храняший информацию о имени, фамилии, номера телефона,
     /// даты рождения,e-mail и ID ВКонтакте.
     /// </summary>
-    public class Contact : IComparable<Contact>, IEquatable<Contact>
+    public class Contact : IComparable<Contact>, IEquatable<Contact>, ICloneable
     {
         /// <summary>
         /// Фамилия контакта.

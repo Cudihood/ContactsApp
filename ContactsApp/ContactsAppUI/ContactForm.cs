@@ -40,11 +40,11 @@ namespace ContactsAppUI
                     return;
                 }
                 SurnameTextBox.Text = Contact.Surname;
-                    NameTextBox.Text = Contact.Name;
-                    NumberTextBox.Text = Contact.Number.Number.ToString();
-                    DateTimePicker.Value = Contact.DateBirth;
-                    IdTextBox.Text = Contact.IdVk;
-                    EmailTextBox.Text = Contact.Email;
+                NameTextBox.Text = Contact.Name; 
+                NumberTextBox.Text = Contact.Number.Number.ToString(); 
+                DateTimePicker.Value = Contact.DateBirth; 
+                IdTextBox.Text = Contact.IdVk; 
+                EmailTextBox.Text = Contact.Email;
             }
         }
 
@@ -76,8 +76,8 @@ namespace ContactsAppUI
                 MessageBox.Show("Строка должна содержать только цифры.", "Ошибка", MessageBoxButtons.OK);
                 return;
             }
-            
 
+            DialogResult = DialogResult.OK;
             Close();
         }
 
@@ -106,7 +106,7 @@ namespace ContactsAppUI
             }
             catch 
             {
-                SurnameTextBox.BackColor = Color.Red;
+                SurnameTextBox.BackColor = Color.LightPink;
                 
             }
         }
@@ -125,7 +125,7 @@ namespace ContactsAppUI
             }
             catch 
             {
-                NameTextBox.BackColor = Color.Red;
+                NameTextBox.BackColor = Color.LightPink;
             }
         }
 
@@ -144,7 +144,7 @@ namespace ContactsAppUI
             }
             catch 
             {
-                NumberTextBox.BackColor = Color.Red;
+                NumberTextBox.BackColor = Color.LightPink;
             }
             
         }
@@ -163,7 +163,7 @@ namespace ContactsAppUI
             }
             catch
             {
-                EmailTextBox.BackColor = Color.Red;
+                EmailTextBox.BackColor = Color.LightPink;
             }
             
         }
@@ -182,7 +182,7 @@ namespace ContactsAppUI
             }
             catch 
             {
-                IdTextBox.BackColor = Color.Red;
+                IdTextBox.BackColor = Color.LightPink;
             }
             
         }
