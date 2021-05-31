@@ -115,7 +115,7 @@ namespace ContactsAppUI
             // 
             this.Okbutton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Okbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Okbutton.Location = new System.Drawing.Point(261, 177);
+            this.Okbutton.Location = new System.Drawing.Point(255, 169);
             this.Okbutton.Name = "Okbutton";
             this.Okbutton.Size = new System.Drawing.Size(88, 25);
             this.Okbutton.TabIndex = 28;
@@ -127,7 +127,7 @@ namespace ContactsAppUI
             // 
             this.RevokeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RevokeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.RevokeButton.Location = new System.Drawing.Point(355, 177);
+            this.RevokeButton.Location = new System.Drawing.Point(349, 169);
             this.RevokeButton.Name = "RevokeButton";
             this.RevokeButton.Size = new System.Drawing.Size(88, 25);
             this.RevokeButton.TabIndex = 29;
@@ -140,7 +140,7 @@ namespace ContactsAppUI
             this.SurnameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.SurnameTextBox.Location = new System.Drawing.Point(113, 13);
             this.SurnameTextBox.Name = "SurnameTextBox";
-            this.SurnameTextBox.Size = new System.Drawing.Size(330, 20);
+            this.SurnameTextBox.Size = new System.Drawing.Size(324, 20);
             this.SurnameTextBox.TabIndex = 30;
             this.SurnameTextBox.TextChanged += new System.EventHandler(this.SurnameTextBox_TextChanged);
             // 
@@ -149,7 +149,7 @@ namespace ContactsAppUI
             this.NameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.NameTextBox.Location = new System.Drawing.Point(113, 39);
             this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(330, 20);
+            this.NameTextBox.Size = new System.Drawing.Size(324, 20);
             this.NameTextBox.TabIndex = 31;
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
@@ -167,7 +167,7 @@ namespace ContactsAppUI
             this.NumberTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.NumberTextBox.Location = new System.Drawing.Point(113, 91);
             this.NumberTextBox.Name = "NumberTextBox";
-            this.NumberTextBox.Size = new System.Drawing.Size(330, 20);
+            this.NumberTextBox.Size = new System.Drawing.Size(324, 20);
             this.NumberTextBox.TabIndex = 33;
             this.NumberTextBox.TextChanged += new System.EventHandler(this.NumberTextBox_TextChanged);
             // 
@@ -176,7 +176,7 @@ namespace ContactsAppUI
             this.EmailTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.EmailTextBox.Location = new System.Drawing.Point(113, 117);
             this.EmailTextBox.Name = "EmailTextBox";
-            this.EmailTextBox.Size = new System.Drawing.Size(330, 20);
+            this.EmailTextBox.Size = new System.Drawing.Size(324, 20);
             this.EmailTextBox.TabIndex = 34;
             this.EmailTextBox.TextChanged += new System.EventHandler(this.EmailTextBox_TextChanged);
             // 
@@ -185,7 +185,7 @@ namespace ContactsAppUI
             this.IdTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.IdTextBox.Location = new System.Drawing.Point(113, 143);
             this.IdTextBox.Name = "IdTextBox";
-            this.IdTextBox.Size = new System.Drawing.Size(330, 20);
+            this.IdTextBox.Size = new System.Drawing.Size(324, 20);
             this.IdTextBox.TabIndex = 35;
             this.IdTextBox.TextChanged += new System.EventHandler(this.IdTextBox_TextChanged);
             // 
@@ -193,7 +193,7 @@ namespace ContactsAppUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 214);
+            this.ClientSize = new System.Drawing.Size(449, 199);
             this.Controls.Add(this.IdTextBox);
             this.Controls.Add(this.EmailTextBox);
             this.Controls.Add(this.NumberTextBox);
@@ -210,8 +210,8 @@ namespace ContactsAppUI
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.MaximumSize = new System.Drawing.Size(470, 253);
-            this.MinimumSize = new System.Drawing.Size(470, 253);
+            this.MaximumSize = new System.Drawing.Size(465, 238);
+            this.MinimumSize = new System.Drawing.Size(465, 238);
             this.Name = "ContactForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

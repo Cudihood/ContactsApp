@@ -133,6 +133,7 @@ namespace ContactsAppUI
                 return;
             }
 
+            int count = ContactsListBox.Items.Count;
             var updateContact = editContact.Contact;
             var selectedContact = CurrentContacts[selectedIndex];
             ContactsListBox.Items.RemoveAt(selectedIndex);
@@ -143,6 +144,14 @@ namespace ContactsAppUI
             ContactsListBox.Items.Insert(selectedIndex, contact);
             CurrentContacts.Insert(selectedIndex, updateContact);
             FindContacts();
+            if (ContactsListBox.Items.Count == 0) 
+            {
+                return;
+            }
+            if (count != ContactsListBox.Items.Count)
+            {
+                selectedIndex = 0;
+            }
             ContactsListBox.SelectedIndex = selectedIndex;
         }
 

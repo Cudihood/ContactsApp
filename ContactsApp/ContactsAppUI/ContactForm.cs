@@ -136,7 +136,6 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void NumberTextBox_TextChanged(object sender, EventArgs e)
         {
-           
             try
             {
                 _contact.Number.Number = Convert.ToInt64(NumberTextBox.Text);

@@ -200,7 +200,9 @@ namespace ContactsApp
         /// <summary>
         /// Конструктор по умолчанию.
         /// </summary>
-        public Contact() { }
+        public Contact()
+        {
+        }
 
         /// <summary>
         /// Конструктор контакта.

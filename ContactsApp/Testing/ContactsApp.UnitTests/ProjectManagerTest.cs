@@ -103,15 +103,15 @@ namespace ContactsApp.UnitTests
             Assert.AreEqual(actualProject.Contacts.Count, 0);
         }
 
-        [Test(Description = "Позитивый тест сохранения в ProjectManager")]
+        [Test(Description = "Позитивный тест сохранения в ProjectManager")]
         public void SaveToFile_SaveCorrectData_FileSavedCorrectly()
         {
             //Setup
             var sevedProject = GetCorrectProject();
-            Directory.Delete(@"\Output");
+            
 
             //Act
-            ProjectManager.SaveToFile(sevedProject,"sevedFile.json",@"Output\");
+            ProjectManager.SaveToFile(sevedProject,"sevedFile.json", @"Output\");
 
             //Assert
             var actual = File.ReadAllText(@"Output\sevedFile.json");
@@ -119,6 +119,6 @@ namespace ContactsApp.UnitTests
 
             Assert.AreEqual(expected, actual);
         }
-
+        
     }
 }
